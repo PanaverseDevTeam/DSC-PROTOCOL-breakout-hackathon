@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 260 100% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 260 40% 96%;
+    --accent-foreground: 260 50% 40%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 260 100% 60%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark theme colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 260 100% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 260 40% 15%;
+    --accent-foreground: 260 50% 70%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 260 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
+  }
+}
+
+/* Glass card styles for light and dark modes */
+.glass-card {
+  @apply backdrop-blur-md backdrop-filter border shadow-sm;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .glass-card {
+  background-color: rgba(30, 30, 35, 0.7);
+  @apply border-border/30;
+}
+
+.glass-card-accent {
+  @apply glass-card;
+  border-color: rgba(124, 58, 237, 0.2);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.1);
+}
+
+.dark .glass-card-accent {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.15);
+}
+
+.glass-card-purple {
+  @apply glass-card;
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+}
+
+.dark .glass-card-purple {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+}
+
+.glass-card-blue {
+  @apply glass-card;
+  border-color: rgba(96, 165, 250, 0.2);
+  box-shadow: 0 4px 20px rgba(96, 165, 250, 0.1);
+}
+
+.dark .glass-card-blue {
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 4px 20px rgba(96, 165, 250, 0.15);
+}
+
+/* Glow text effects */
+.glow-text-purple {
+  @apply text-purple-600 dark:text-purple-400;
+  text-shadow: 0 0 10px rgba(149, 76, 233, 0.3);
+}
+
+.dark .glow-text-purple {
+  text-shadow: 0 0 10px rgba(149, 76, 233, 0.8);
+}
+
+.glow-text-white {
+  @apply text-gray-900 dark:text-white;
+}
+
+.dark .glow-text-white {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-item {
+  @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all hover:bg-accent hover:text-accent-foreground;
+}
+
+.sidebar-item.active {
+  @apply bg-primary/10 text-primary border border-primary/20;
+}
+
+.dark .sidebar-item.active {
+  @apply bg-primary/20 border-primary/30;
+  box-shadow: 0 0 10px rgba(149, 76, 233, 0.2);
+}
+
+/* Add tooltip for collapsed sidebar items */
+.sidebar-tooltip {
+  @apply absolute left-full ml-2 px-2 py-1 bg-popover rounded text-xs invisible opacity-0 transition-opacity;
+  white-space: nowrap;
+}
+
+.sidebar-item:hover .sidebar-tooltip {
+  @apply visible opacity-100;
+}
+
+.typing-animation::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.ai-message-animation {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.chain-status-indicator {
+  @apply h-2 w-2 rounded-full;
+}
+
+.chain-status-indicator.healthy {
+  @apply bg-green-500;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.chain-status-indicator.warning {
+  @apply bg-yellow-500;
+  box-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+}
+
+.chain-status-indicator.critical {
+  @apply bg-red-500;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* Add sidebar collapse/expand transition */
+.sidebar-collapse-btn {
+  @apply absolute -right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-primary/20 border text-accent-foreground transition-all hover:bg-primary/30;
+  border-color: rgba(149, 76, 233, 0.2);
+}
+
+.dark .sidebar-collapse-btn {
+  border-color: rgba(149, 76, 233, 0.3);
+  box-shadow: 0 0 10px rgba(149, 76, 233, 0.2);
+}
+
+/* Button glow effect */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(149, 76, 233, 0), rgba(149, 76, 233, 0.2), rgba(149, 76, 233, 0));
+  transform: rotate(30deg);
+  animation: glowSweep 3s linear infinite;
+  z-index: -1;
+}
+
+.dark .btn-glow::after {
+  background: linear-gradient(to bottom right, rgba(149, 76, 233, 0), rgba(149, 76, 233, 0.3), rgba(149, 76, 233, 0));
+}
+
+@keyframes glowSweep {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+/* Gradient borders */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius);
+  background-clip: padding-box;
+}
+
+.gradient-border::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, rgba(149, 76, 233, 0.3), rgba(191, 131, 255, 0.3));
+  border-radius: calc(var(--radius) + 1px);
+  z-index: -1;
+}
+
+.dark .gradient-border::after {
+  background: linear-gradient(45deg, rgba(149, 76, 233, 0.5), rgba(191, 131, 255, 0.5));
+}
